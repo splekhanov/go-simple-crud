@@ -1,0 +1,9 @@
+# IDE system files
+.idea
+.vscode
+
+# Folders
+_test
+
+# Files
+.env
