@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/splekhanov/go-simple-crud/internal/database"
+	"github.com/splekhanov/go-simple-crud/internal/models"
 )
 
 // ShowAccount godoc
@@ -13,14 +14,11 @@ import (
 // @Tags         movies
 // @Accept       json
 // @Produce      json
-// @Param        id   path      int  true  "Account ID"
-// @Success      200  {object}  model.Account
-// @Failure      400  {object}  httputil.HTTPError
-// @Failure      404  {object}  httputil.HTTPError
-// @Failure      500  {object}  httputil.HTTPError
-// @Router       /accounts/{id} [get]
+// @Param        id   path      int  true  "Movie ID"
+// @Success      200  {object}  models.Movie
+// @Router       /movies [post]
 func CreateMovie(c *gin.Context) {
-	var movie *database.Movie
+	var movie *models.Movie
 	err := c.ShouldBind(&movie)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
