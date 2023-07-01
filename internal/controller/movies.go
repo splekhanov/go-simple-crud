@@ -6,24 +6,26 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/splekhanov/go-simple-crud/internal/database"
 	"github.com/splekhanov/go-simple-crud/internal/model"
+	"github.com/swaggo/swag/example/celler/httputil"
 )
 
 // ShowAccount godoc
 // @Summary      Creates a movie
-// @Description  create a new movie
+// @Description  create a new movie zzz
 // @Tags         movies
 // @Accept       json
 // @Produce      json
-// @Param        movie   body models.Movie	true	"Add movie"
-// @Success      200  {object}  models.Movie
+// @Param        movie	body model.Movie	true	"Add movie"
+// @Success      200	{object}	model.Movie
+// @Failure		 400	{object}	httputil.HTTPError
+// @Failure		 404	{object}	httputil.HTTPError
+// @Failure		 500	{object}	httputil.HTTPError
 // @Router       /movies [post]
 func CreateMovie(c *gin.Context) {
 	var movie *model.Movie
 	err := c.ShouldBind(&movie)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err,
-		})
+		httputil.NewError(c, http.StatusBadRequest, err)
 		return
 	}
 	res := database.DB.Create(movie)
@@ -33,8 +35,6 @@ func CreateMovie(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"book": movie,
-	})
+	c.JSON(http.StatusOK, movie)
 	return
 }

@@ -1,6 +1,6 @@
 basePath: /api/v1
 definitions:
-  github_com_splekhanov_go-simple-crud_internal_models.Movie:
+  github_com_splekhanov_go-simple-crud_internal_model.Movie:
     properties:
       country:
         type: string
@@ -50,20 +50,21 @@ paths:
     post:
       consumes:
       - application/json
-      description: create a new movie
+      description: create a new movie zzz
       parameters:
-      - description: Movie ID
-        in: path
-        name: id
+      - description: Add movie
+        in: body
+        name: movie
         required: true
-        type: integer
+        schema:
+          $ref: '#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_splekhanov_go-simple-crud_internal_models.Movie'
+            $ref: '#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie'
       summary: Creates a movie
       tags:
       - movies

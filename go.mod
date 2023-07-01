@@ -7,6 +7,7 @@ require (
 	github.com/swaggo/files v1.0.1
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.1
+	github.com/swaggo/swag/example/celler v0.0.0-20230625091231-c8372f64eaf1
 	gorm.io/driver/postgres v1.5.2
 	gorm.io/gorm v1.25.2
 )

@@ -27,7 +27,7 @@ const docTemplate = `{
     "paths": {
         "/movies": {
             "post": {
-                "description": "create a new movie",
+                "description": "create a new movie zzz",
                 "consumes": [
                     "application/json"
                 ],
@@ -40,18 +40,20 @@ const docTemplate = `{
                 "summary": "Creates a movie",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "Movie ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
+                        "description": "Add movie",
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_splekhanov_go-simple-crud_internal_models.Movie"
+                            "$ref": "#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie"
                         }
                     }
                 }
@@ -59,7 +61,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_splekhanov_go-simple-crud_internal_models.Movie": {
+        "github_com_splekhanov_go-simple-crud_internal_model.Movie": {
             "type": "object",
             "properties": {
                 "country": {
