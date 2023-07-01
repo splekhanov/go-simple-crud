@@ -8,6 +8,10 @@ import (
 	"gorm.io/gorm"
 )
 
+import (
+	"github.com/splekhanov/go-simple-crud/internal/models"
+)
+
 var DB *gorm.DB
 var err error
 
@@ -22,10 +26,10 @@ type Movie struct {
 
 func DatabaseConnection() {
 	host := "localhost"
-	port := "5432"
+	port := "5555"
 	dbName := "postgres"
 	dbUser := "postgres"
-	password := "pass1234"
+	password := "postgres"
 	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
 		host,
 		port,

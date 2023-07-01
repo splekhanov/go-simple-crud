@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
-	"example.com/go-crud-api/controllers"
-	"example.com/go-crud-api/database"
 	"github.com/gin-gonic/gin"
+	"github.com/splekhanov/go-simple-crud/internal/controller"
+	"github.com/splekhanov/go-simple-crud/internal/database"
 )
 
 func main() {
@@ -13,10 +15,15 @@ func main() {
 	database.DatabaseConnection()
 
 	r := gin.Default()
-	r.GET("/books/:id", controllers.ReadBook)
-	r.GET("/books", controllers.ReadBooks)
-	r.POST("/books", controllers.CreateBook)
-	r.PUT("/books/:id", controllers.UpdateBook)
-	r.DELETE("/books/:id", controllers.DeleteBook)
-	r.Run(":5000")
+	v1 := r.Group("/api/v1")
+
+	{
+		movies := v1.Group("/movies")
+		{
+			movies.POST("", controller.CreateMovie)
+		}
+
+	}
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.Run(":8080")
 }
