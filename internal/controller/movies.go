@@ -2,22 +2,21 @@ package controller
 
 import (
 	"net/http"
-	"simpleCrud/internal/database"
 
 	"github.com/gin-gonic/gin"
 	"github.com/splekhanov/go-simple-crud/internal/database"
 )
 
-func CreateBook(c *gin.Context) {
-	var book *database.Book
-	err := c.ShouldBind(&book)
+func CreateMovie(c *gin.Context) {
+	var movie *database.Movie
+	err := c.ShouldBind(&movie)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
 		})
 		return
 	}
-	res := database.DB.Create(book)
+	res := database.DB.Create(movie)
 	if res.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "error creating a book",
@@ -25,7 +24,7 @@ func CreateBook(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"book": book,
+		"book": movie,
 	})
 	return
 }
