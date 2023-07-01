@@ -27,7 +27,7 @@ const docTemplate = `{
     "paths": {
         "/movies": {
             "post": {
-                "description": "create a new movie zzz",
+                "description": "create a new movie",
                 "consumes": [
                     "application/json"
                 ],
@@ -55,6 +55,24 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httputil.HTTPError"
+                        }
                     }
                 }
             }
@@ -67,41 +85,32 @@ const docTemplate = `{
                 "country": {
                     "type": "string"
                 },
-                "createdAt": {
-                    "type": "string"
-                },
-                "deletedAt": {
-                    "$ref": "#/definitions/gorm.DeletedAt"
-                },
                 "director": {
                     "type": "string"
                 },
                 "genre": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "integer"
-                },
                 "title": {
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "string",
+                    "example": "The Thing"
                 },
                 "year": {
                     "type": "string"
                 }
             }
         },
-        "gorm.DeletedAt": {
+        "httputil.HTTPError": {
             "type": "object",
             "properties": {
-                "time": {
-                    "type": "string"
+                "code": {
+                    "type": "integer",
+                    "example": 400
                 },
-                "valid": {
-                    "description": "Valid is true if Time is not NULL",
-                    "type": "boolean"
+                "message": {
+                    "type": "string",
+                    "example": "status bad request"
                 }
             }
         }

@@ -11,15 +11,15 @@ import (
 
 // ShowAccount godoc
 // @Summary      Creates a movie
-// @Description  create a new movie zzz
+// @Description  create a new movie
 // @Tags         movies
 // @Accept       json
 // @Produce      json
 // @Param        movie	body model.Movie	true	"Add movie"
 // @Success      200	{object}	model.Movie
-// @Failure		 400	{object}	httputil.HTTPError
-// @Failure		 404	{object}	httputil.HTTPError
-// @Failure		 500	{object}	httputil.HTTPError
+// @Failure		 400	{object}	httputil.HTTPError{400}
+// @Failure		 404	{object}	httputil.HTTPError{404}
+// @Failure		 500	{object}	httputil.HTTPError{500}
 // @Router       /movies [post]
 func CreateMovie(c *gin.Context) {
 	var movie *model.Movie
@@ -30,7 +30,7 @@ func CreateMovie(c *gin.Context) {
 	}
 	res := database.DB.Create(movie)
 	if res.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "error creating a book",
 		})
 		return

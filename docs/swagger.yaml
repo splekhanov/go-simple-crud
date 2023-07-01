@@ -4,30 +4,25 @@ definitions:
     properties:
       country:
         type: string
-      createdAt:
-        type: string
-      deletedAt:
-        $ref: '#/definitions/gorm.DeletedAt'
       director:
         type: string
       genre:
         type: string
-      id:
-        type: integer
       title:
-        type: string
-      updatedAt:
+        example: The Thing
+        format: string
         type: string
       year:
         type: string
     type: object
-  gorm.DeletedAt:
+  httputil.HTTPError:
     properties:
-      time:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
         type: string
-      valid:
-        description: Valid is true if Time is not NULL
-        type: boolean
     type: object
 externalDocs:
   description: OpenAPI
@@ -50,7 +45,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: create a new movie zzz
+      description: create a new movie
       parameters:
       - description: Add movie
         in: body
@@ -65,6 +60,18 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/github_com_splekhanov_go-simple-crud_internal_model.Movie'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
       summary: Creates a movie
       tags:
       - movies
