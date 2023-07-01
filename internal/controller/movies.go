@@ -5,7 +5,7 @@ import (
 	"simpleCrud/internal/database"
 
 	"github.com/gin-gonic/gin"
-	"github.com/simpleCrud/internal/database"
+	"github.com/splekhanov/go-simple-crud/internal/database"
 )
 
 func CreateBook(c *gin.Context) {
