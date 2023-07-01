@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/splekhanov/go-simple-crud/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "go-swag-demo-api/docs"
 
 	"github.com/gin-gonic/gin"
 	"github.com/splekhanov/go-simple-crud/internal/controller"

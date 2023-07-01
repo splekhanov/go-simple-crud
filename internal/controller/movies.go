@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/splekhanov/go-simple-crud/internal/database"
-	"github.com/splekhanov/go-simple-crud/internal/models"
+	"github.com/splekhanov/go-simple-crud/internal/model"
 )
 
 // ShowAccount godoc
@@ -14,11 +14,11 @@ import (
 // @Tags         movies
 // @Accept       json
 // @Produce      json
-// @Param        id   path      int  true  "Movie ID"
+// @Param        movie   body models.Movie	true	"Add movie"
 // @Success      200  {object}  models.Movie
 // @Router       /movies [post]
 func CreateMovie(c *gin.Context) {
-	var movie *models.Movie
+	var movie *model.Movie
 	err := c.ShouldBind(&movie)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{

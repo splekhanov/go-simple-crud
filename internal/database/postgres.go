@@ -9,7 +9,7 @@ import (
 )
 
 import (
-	"github.com/splekhanov/go-simple-crud/internal/models"
+	"github.com/splekhanov/go-simple-crud/internal/model"
 )
 
 var DB *gorm.DB
@@ -30,7 +30,7 @@ func DatabaseConnection() {
 	)
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	DB.AutoMigrate(models.Movie{})
+	DB.AutoMigrate(model.Movie{})
 	if err != nil {
 		log.Fatal("Error connecting to the database...", err)
 	}
